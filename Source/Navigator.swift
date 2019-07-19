@@ -107,6 +107,7 @@ extension Navigator {
 
     func setRootViewController(_ viewController: UIViewController, animated: Bool) {
         completions.forEach { $0.value() }      // call completions so all view controllers are deallocated
+        completions = [:]
         navigationController.setViewControllers([viewController], animated: animated)
     }
 
