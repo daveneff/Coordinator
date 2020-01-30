@@ -15,7 +15,7 @@ import UIKit
 ///
 ///  For a concrete instance, use a `Navigator`.
 
-protocol NavigatorType {
+public protocol NavigatorType {
     
     /** Pops all the view controllers on the stack except the root view controller and updates the display. */
     @discardableResult
@@ -37,7 +37,7 @@ protocol NavigatorType {
 
 }
 
-extension NavigatorType {
+public extension NavigatorType {
 
     func push(_ viewController: UIViewController, animated: Bool) {
         push(viewController, animated: animated, onPoppedCompletion: nil)
@@ -53,12 +53,12 @@ extension NavigatorType {
 ///  Unlike a regular `UINavigationController`, however, it provide a completion handler
 ///  for when its `UIViewContoller`s are popped from the navigation stack.
 
-final class Navigator: NSObject, NavigatorType {
+public final class Navigator: NSObject, NavigatorType {
 
     private let navigationController: UINavigationController
     private var completions: [UIViewController: () -> Void]
     
-    init(navigationController: UINavigationController = UINavigationController()) {
+    public init(navigationController: UINavigationController = UINavigationController()) {
         self.navigationController = navigationController
         self.completions = [:]
         
@@ -71,7 +71,7 @@ final class Navigator: NSObject, NavigatorType {
 
 // MARK: - Navigation methods
 
-extension Navigator {
+public extension Navigator {
     
     func popToRootViewController(animated: Bool) -> [UIViewController]? {
         if let poppedControllers = navigationController.popToRootViewController(animated: animated) {
@@ -119,7 +119,7 @@ extension Navigator: UINavigationControllerDelegate {
     
     // Runs completion handler when a user swipes-to-go-back or taps the back button in the navigation bar.
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         guard let poppingViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),    // ensure the view controller is popping
             !navigationController.viewControllers.contains(poppingViewController) else {
                 return

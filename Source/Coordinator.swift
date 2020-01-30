@@ -9,7 +9,7 @@ import UIKit
 
 ///  The most basic type of `Coordinator`: one that manages other coordinators.
 
-protocol Coordinator: class {
+public protocol Coordinator: class {
     
     /** Any child coordinators to keep track of, to prevent them from getting deallocated in memory. */
     var childCoordinators: [Coordinator] { get set }
@@ -19,7 +19,7 @@ protocol Coordinator: class {
     
 }
 
-extension Coordinator {
+public extension Coordinator {
     
     /**
      Adds a child coordinator to the parent, preventing it from getting deallocated in memory.
@@ -53,7 +53,7 @@ extension Coordinator {
 ///  It's usually best to avoid implementing this protocol directly. It acts as a base protocol
 ///  for `PresentationCoordinator` to avoid `associatedtype` compiler errors.
 
-protocol _PresentationCoordinator: Coordinator {
+public protocol _PresentationCoordinator: Coordinator {
     
     /** The underlying root view controller for `PresentationCoordinator`. */
     var _rootViewController: UIViewController { get }
@@ -62,7 +62,7 @@ protocol _PresentationCoordinator: Coordinator {
 
 ///  A `Coordinator` which also manages a `UIViewController`.
 
-protocol PresentationCoordinator: _PresentationCoordinator {
+public protocol PresentationCoordinator: _PresentationCoordinator {
     
     associatedtype ViewController: UIViewController
     
@@ -73,7 +73,7 @@ protocol PresentationCoordinator: _PresentationCoordinator {
 
 // `BasePresentationCoordinator` default implementation
 
-extension PresentationCoordinator {
+public extension PresentationCoordinator {
     
     /** A computed property which simply returns the `rootViewController`. */
     var _rootViewController: UIViewController { return rootViewController }
@@ -82,7 +82,7 @@ extension PresentationCoordinator {
 
 // MARK: - Presentation Methods
 
-extension PresentationCoordinator {
+public extension PresentationCoordinator {
     
     /**
      Starts a child coordinator and presents its `rootViewController` modally. This method also retains the `childCoordinator` in memory, which needs to be released upon dismissal.
@@ -120,7 +120,7 @@ extension PresentationCoordinator {
 
 ///  Handles the navigation flow between one or more `UIViewController`s and/or `Coordinator`s, pulling the responsibility of navigation one level above.
 
-protocol NavigationCoordinator: PresentationCoordinator {
+public protocol NavigationCoordinator: PresentationCoordinator {
     
     /** Responsible for the navigation stack between `UIViewController`s. */
     var navigator: NavigatorType { get }
@@ -129,7 +129,7 @@ protocol NavigationCoordinator: PresentationCoordinator {
 
 // MARK: - Navigation Methods
 
-extension NavigationCoordinator {
+public extension NavigationCoordinator {
     
     /**
      Starts a child coordinator and pushes its `rootViewController` onto the navigation stack.
