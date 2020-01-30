@@ -7,7 +7,7 @@ import UIKit
 
 // MARK: - Coordinator
 
-final class ExamplesCoordinator: CoordinatorNavigable {
+final class ExamplesCoordinator: NavigationCoordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigator: NavigatorType

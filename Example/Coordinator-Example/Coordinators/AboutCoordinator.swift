@@ -8,7 +8,7 @@ import SafariServices
 
 // MARK: - Coordinator
 
-final class AboutCoordinator: NSObject, CoordinatorNavigable {
+final class AboutCoordinator: NSObject, NavigationCoordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigator: NavigatorType

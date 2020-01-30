@@ -24,7 +24,7 @@ final class SummaryViewController: UIViewController {
     }
     
     private let descriptionLabel = UILabel {
-        $0.text = "A Coordinator is the foundation, which simply starts and keeps track of any child coordinators.\n\nCoordinatorPresentable can be seen — it owns a UIViewController it’s in charge of handling business and/or presentation logic for.\n\nCoordinatorNavigable is used when the coordinator manages, or is part of, a more complex navigation stack."
+        $0.text = "A Coordinator is the foundation, which simply starts and keeps track of any child coordinators.\n\nPresentationCoordinator can be seen — it owns a UIViewController it’s in charge of handling business and/or presentation logic for.\n\nNavigationCoordinator is used when the coordinator manages, or is part of, a more complex navigation stack."
     }
     
     private let imageView = UIImageView {

@@ -44,25 +44,25 @@ extension Coordinator {
 }
 
 // *******************************
-// MARK: - CoordinatorPresentable
+// MARK: - PresentationCoordinator
 // *******************************
 
-///  The underlying protocol for `CoordinatorPresentable`.
+///  The underlying protocol for `PresentationCoordinator`.
 ///
 ///  - Important:
 ///  It's usually best to avoid implementing this protocol directly. It acts as a base protocol
-///  for `CoordinatorPresentable` to avoid `associatedtype` compiler errors.
+///  for `PresentationCoordinator` to avoid `associatedtype` compiler errors.
 
-protocol BaseCoordinatorPresentable: Coordinator {
+protocol _PresentationCoordinator: Coordinator {
     
-    /** The underlying root view controller for `CoordinatorPresentable`. */
+    /** The underlying root view controller for `PresentationCoordinator`. */
     var _rootViewController: UIViewController { get }
     
 }
 
 ///  A `Coordinator` which also manages a `UIViewController`.
 
-protocol CoordinatorPresentable: BaseCoordinatorPresentable {
+protocol PresentationCoordinator: _PresentationCoordinator {
     
     associatedtype ViewController: UIViewController
     
@@ -71,9 +71,9 @@ protocol CoordinatorPresentable: BaseCoordinatorPresentable {
     
 }
 
-// `BaseCoordinatorPresentable` default implementation
+// `BasePresentationCoordinator` default implementation
 
-extension CoordinatorPresentable {
+extension PresentationCoordinator {
     
     /** A computed property which simply returns the `rootViewController`. */
     var _rootViewController: UIViewController { return rootViewController }
@@ -82,7 +82,7 @@ extension CoordinatorPresentable {
 
 // MARK: - Presentation Methods
 
-extension CoordinatorPresentable {
+extension PresentationCoordinator {
     
     /**
      Starts a child coordinator and presents its `rootViewController` modally. This method also retains the `childCoordinator` in memory, which needs to be released upon dismissal.
@@ -92,7 +92,7 @@ extension CoordinatorPresentable {
         - animated: Specify `true` to animate the transition or `false` if you do not want the transition to be animated.
      */
     
-    func presentCoordinator(_ childCoordinator: BaseCoordinatorPresentable, animated: Bool) {
+    func presentCoordinator(_ childCoordinator: _PresentationCoordinator, animated: Bool) {
         addChildCoordinator(childCoordinator)
         childCoordinator.start()
         rootViewController.present(childCoordinator._rootViewController, animated: animated)
@@ -107,7 +107,7 @@ extension CoordinatorPresentable {
         - completion: The block to execute after the view controller is dismissed.
      */
     
-    func dismissCoordinator(_ childCoordinator: BaseCoordinatorPresentable, animated: Bool, completion: (() -> Void)? = nil) {
+    func dismissCoordinator(_ childCoordinator: _PresentationCoordinator, animated: Bool, completion: (() -> Void)? = nil) {
         childCoordinator._rootViewController.dismiss(animated: animated, completion: completion)
         self.removeChildCoordinator(childCoordinator)
     }
@@ -115,12 +115,12 @@ extension CoordinatorPresentable {
 }
 
 // *******************************
-// MARK: - CoordinatorNavigable
+// MARK: - NavigationCoordinator
 // *******************************
 
 ///  Handles the navigation flow between one or more `UIViewController`s and/or `Coordinator`s, pulling the responsibility of navigation one level above.
 
-protocol CoordinatorNavigable: CoordinatorPresentable {
+protocol NavigationCoordinator: PresentationCoordinator {
     
     /** Responsible for the navigation stack between `UIViewController`s. */
     var navigator: NavigatorType { get }
@@ -129,7 +129,7 @@ protocol CoordinatorNavigable: CoordinatorPresentable {
 
 // MARK: - Navigation Methods
 
-extension CoordinatorNavigable {
+extension NavigationCoordinator {
     
     /**
      Starts a child coordinator and pushes its `rootViewController` onto the navigation stack.
@@ -140,7 +140,7 @@ extension CoordinatorNavigable {
         - animated: Specify `true` to animate the transition or `false` if you do not want the transition to be animated.
      */
     
-    func pushCoordinator(_ childCoordinator: BaseCoordinatorPresentable, animated: Bool) {
+    func pushCoordinator(_ childCoordinator: _PresentationCoordinator, animated: Bool) {
         addChildCoordinator(childCoordinator)
         childCoordinator.start()
         navigator.push(childCoordinator._rootViewController,

@@ -15,7 +15,7 @@ protocol OnboardingCoordinatorDelegate: class {
 
 /** A Coordinator which takes a user through the first-time user / onboarding flow. */
 
-final class OnboardingCoordinator: CoordinatorNavigable {
+final class OnboardingCoordinator: NavigationCoordinator {
     
     weak var delegate: OnboardingCoordinatorDelegate?
     

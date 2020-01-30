@@ -55,7 +55,7 @@ final class BrowseProductsViewController: UIViewController {
 
 // The view controller's owning coordinator
 
-final class BrowseProductsCoordinator: CoordinatorNavigable { 
+final class BrowseProductsCoordinator: NavigationCoordinator { 
 
     // Any child coordinators this Coordinator is holding on to
     var childCoordinators: [Coordinator] = []

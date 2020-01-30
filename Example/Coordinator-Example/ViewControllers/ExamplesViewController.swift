@@ -21,12 +21,12 @@ final class ExamplesViewController: UIViewController {
 
     // MARK: - UI Elements
     
-    private let coordinatorPresentableLabel = UILabel {
-        $0.text = "CoordinatorPresentable"
+    private let presentableCoordinatorLabel = UILabel {
+        $0.text = "PresentationCoordinator"
     }
     
-    private let coordinatorNavigableLabel = UILabel {
-        $0.text = "CoordinatorNavigable"
+    private let navigationCoordinatorLabel = UILabel {
+        $0.text = "NavigationCoordinator"
     }
     
     private let presentViewControllerButton = UIButton(type: .system).applying {
@@ -63,7 +63,7 @@ private extension ExamplesViewController {
         
         view.backgroundColor = .white
 
-        [coordinatorPresentableLabel, coordinatorNavigableLabel].forEach {
+        [presentableCoordinatorLabel, navigationCoordinatorLabel].forEach {
             $0.setDefaultStyle(size: .paragraph, weight: .bold)
         }
         
@@ -71,10 +71,10 @@ private extension ExamplesViewController {
             $0.titleLabel?.setDefaultStyle(size: .paragraph, weight: .regular)
         }
         
-        let stackView = UIStackView(arrangedSubviews: [coordinatorPresentableLabel,
+        let stackView = UIStackView(arrangedSubviews: [presentableCoordinatorLabel,
                                                        presentViewControllerButton,
                                                        presentCoordinatorButton,
-                                                       coordinatorNavigableLabel,
+                                                       navigationCoordinatorLabel,
                                                        pushCoordinatorButton])
         stackView.alignment = .center
         stackView.axis = .vertical
