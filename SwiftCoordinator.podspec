@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'SwiftCoordinator'
-    spec.version                = '0.1.0'
+    spec.version                = '0.2.0'
     spec.summary                = 'An implementation of the Coordinator pattern for iOS written in Swift 5.'
     spec.source                 = { :git => 'https://github.com/daveneff/Coordinator.git', :tag => spec.version }
     spec.license                = { :type => 'MIT', :file => 'LICENSE' }
