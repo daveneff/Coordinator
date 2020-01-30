@@ -122,6 +122,11 @@ With that, my example project focuses exclusively on the relationship between Co
 
 To see the example app, simply open `Example/Coordinator-Example.xcodeproj` in Xcode and run the project.
 
+## Cocoapod
+The source for the example project is available on [Cocoapods](https://cocoapods.org) under the name **SwiftCoordinator**, if you want to experiment with this implementation yourself. Just add the following to your `Podfile`:
+
+```pod 'SwiftCoordinator'```
+
 ## Credits
 Thanks for checking out my take on coordinators -- I hope it's helpful if you're exploring the pattern to use in a project. if you have any suggestions or improvements, feel free to submit a PR! 
 
